@@ -62,3 +62,7 @@ Post request body example:
 
 
 Using this Concept, you can scale the micro service architecture.
+
+find hard to set your own postman collection? 
+Send me an email to: *kang.tatang@yahoo.co.id*
+I will send you my postman collection file.
