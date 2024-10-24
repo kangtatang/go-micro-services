@@ -1,22 +1,33 @@
 # Description
 
 This is a simple backend to show the micro services architecture.
+Every service handle it's own database (module).
+When need to scale, you can add more service.
+We can get the data from other service using API Communication.
 
-## Technologies
+## Example: 
+- go-ms-karyawan to handle employee data management.
+- go-ms-project to handle project data management.
+- go-ms-mainapp to get data employee and project from go-ms-karyawan and go-ms-project.
+
+# Technologies
 
 - Golang
-- Go Fiber
+- Go-Fiber
 - SQLite
 
-## Using poly repo
+## Using poly repo Concept
 
 - Every Service runs in a different port (go-ms-karyawan:3000, go-ms-project:4000, go-ms-mainapp:5000)
 - Every Service has its own database (sqlite)
 - Every Service has its own folder
+- API Communication using HTTP Request
 - Use Post man to test the API
 - DB Auto Create
 
-## Installing
+# Installing
+
+## Install Module
 - run go mod tidy in every folder
 - run go run main.go in every folder
 
@@ -61,7 +72,7 @@ Post request body example:
 - http://localhost:5000/api/employee-projects/:id_employee (GET ALL Project By Employee ID)
 
 
-Using this Concept, you can scale the micro service architecture.
+## Using this Concept, you can scale the micro service architecture.
 
 find hard to set your own postman collection? 
 Send me an email to: *kang.tatang@yahoo.co.id*
