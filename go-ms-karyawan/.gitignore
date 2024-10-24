@@ -1,0 +1,35 @@
+# Go binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Build output
+/bin/
+/obj/
+*.out
+*.o
+*.a
+*.class
+
+# Vendor directory
+/vendor/
+
+# Dependency directories
+/go.sum
+/go.mod
+
+# SQLite database files
+*.db
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
