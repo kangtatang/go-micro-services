@@ -19,7 +19,7 @@ import (
 // @Success 200 {object} models.EmployeeProjectsResponse
 // @Failure 404 {object} models.ErrorResponse
 // @Failure 500 {object} models.ErrorResponse
-// @Router /employees/{id}/projects [get]
+// @Router /employee-projects/{id} [get]
 func GetEmployeeProjects(c *fiber.Ctx) error {
 	employeeID := c.Params("id")
 

@@ -9,7 +9,7 @@
     "host": "localhost:5000",
     "basePath": "/api",
     "paths": {
-        "/employees/{id}/projects": {
+        "/employee-projects/{id}": {
             "get": {
                 "description": "Get employee data and related projects",
                 "consumes": [
