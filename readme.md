@@ -99,3 +99,22 @@ Post request body example:
 find hard to set your own postman collection? 
 Send me an email to: *kang.tatang@yahoo.co.id*
 I will send you my postman collection file.
+
+
+# NOTES
+To Install swagger in your project, you can use this command:
+`go get -u github.com/swaggo/swag/cmd/swag`
+
+Type this command in your terminal at root project folder:
+`swag init`
+
+then install fiber-swagger:
+`go get -u github.com/swaggo/fiber-swagger`
+`go get -u github.com/swaggo/swag`
+
+## Akses API Documentation
+- http://localhost:3000/swagger/index.html
+- http://localhost:4000/swagger/index.htm
+- http://localhost:5000/swagger/index.htm
+
+Don't forget to run the service first.

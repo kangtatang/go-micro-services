@@ -1,0 +1,143 @@
+basePath: /api
+definitions:
+  models.Employee:
+    properties:
+      age:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      position:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: API for managing employees
+  title: Employee Service API
+  version: "1.0"
+paths:
+  /employees:
+    get:
+      description: Retrieve a list of employees
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Employee'
+            type: array
+        "500":
+          description: 'error": "failed to fetch employees'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all employees
+      tags:
+      - Employees
+  /employees/{id}:
+    delete:
+      description: Delete an employee by ID
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: 'message": "employee deleted successfully'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: 'error": "invalid employee ID'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: 'error": "failed to delete employee'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete an employee
+      tags:
+      - Employees
+    get:
+      description: Retrieve an employee by their ID
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Employee'
+        "400":
+          description: 'error": "invalid employee ID'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: 'error": "employee not found'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get employee by ID
+      tags:
+      - Employees
+    put:
+      consumes:
+      - application/json
+      description: Update an existing employee by ID
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated Employee Data
+        in: body
+        name: employee
+        required: true
+        schema:
+          $ref: '#/definitions/models.Employee'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'message": "employee updated successfully'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: 'error": "cannot parse JSON'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: 'error": "failed to update employee'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update an employee
+      tags:
+      - Employees
+swagger: "2.0"

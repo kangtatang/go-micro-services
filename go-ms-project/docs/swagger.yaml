@@ -1,0 +1,157 @@
+basePath: /api
+definitions:
+  models.CreateProjectResponse:
+    properties:
+      employee:
+        $ref: '#/definitions/models.Employee'
+      message:
+        type: string
+      project:
+        $ref: '#/definitions/models.Project'
+    type: object
+  models.Employee:
+    properties:
+      age:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      position:
+        type: string
+    type: object
+  models.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  models.Project:
+    properties:
+      description:
+        type: string
+      employee_id:
+        description: ID karyawan yang diambil dari service karyawan
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.SuccessResponse:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:4000
+info:
+  contact: {}
+  description: API for managing employees
+  title: Project Management Service API
+  version: "1.0"
+paths:
+  /projects:
+    get:
+      description: Get all projects or projects based on employee ID
+      parameters:
+      - description: Employee ID
+        in: query
+        name: employee_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Project'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Get list of projects
+      tags:
+      - projects
+  /projects/{id}:
+    delete:
+      description: Delete a project by ID
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Delete project by ID
+      tags:
+      - projects
+    get:
+      description: Get a single project by ID along with employee details
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CreateProjectResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Get project by ID
+      tags:
+      - projects
+    put:
+      description: Update a project by ID
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Data
+        in: body
+        name: project
+        required: true
+        schema:
+          $ref: '#/definitions/models.Project'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Update project by ID
+      tags:
+      - projects
+swagger: "2.0"
