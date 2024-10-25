@@ -31,6 +31,28 @@ We can get the data from other service using API Communication.
 - run go mod tidy in every folder
 - run go run main.go in every folder
 
+# RUN APP
+## Using Powershell
+
+`./run_all_services.ps1`
+
+if you have problem with execution permission, you can change it by this command:
+
+`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+  OR
+
+`Set-ExecutionPolicy RemoteSigned`
+
+## Using foreman Procfile
+
+- install foreman `npm install -g foreman`
+- create Procfile in root folder (see the file Procfile for content)
+- run `nf start`
+
+## Using Docker
+- [On Progress]
+
 ## API Documentation
 ### go-ms-karyawan
 - http://localhost:3000/api/employees (GET ALL)
