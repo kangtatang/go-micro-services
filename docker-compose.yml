@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  go-ms-karyawan:
+    build: ./go-ms-karyawan
+    container_name: go-ms-karyawan
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  go-ms-project:
+    build: ./go-ms-project
+    container_name: go-ms-project
+    ports:
+      - "4000:4000"
+    networks:
+      - app-network
+    depends_on:
+      - go-ms-karyawan
+
+  go-ms-mainapp:
+    build: ./go-ms-mainapp
+    container_name: go-ms-mainapp
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    depends_on:
+      - go-ms-karyawan
+      - go-ms-project
+
+networks:
+  app-network:
+    driver: bridge

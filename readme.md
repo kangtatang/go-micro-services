@@ -51,7 +51,7 @@ if you have problem with execution permission, you can change it by this command
 - run `nf start`
 
 ## Using Docker
-- [On Progress]
+- run `docker-compose up --build` in root project folder
 
 ## API Documentation
 ### go-ms-karyawan
