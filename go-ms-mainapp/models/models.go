@@ -1,5 +1,12 @@
 package models
 
+type Employee struct {
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Age      int    `json:"age"`
+	Position string `json:"position"`
+}
+
 type Project struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -15,15 +22,7 @@ type SuccessResponse struct {
 	Message string `json:"message"`
 }
 
-type CreateProjectResponse struct {
-	Message  string   `json:"message"`
-	Project  Project  `json:"project"`
-	Employee Employee `json:"employee"`
-}
-
-type Employee struct {
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	Age      int    `json:"age"`
-	Position string `json:"position"`
+type EmployeeProjectsResponse struct {
+	Employee Employee  `json:"employee"`
+	Projects []Project `json:"projects"`
 }

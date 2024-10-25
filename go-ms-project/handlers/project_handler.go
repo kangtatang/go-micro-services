@@ -20,7 +20,15 @@ type Employee struct {
 	Position string `json:"position"`
 }
 
-// GetProjects untuk mendapatkan semua proyek atau proyek berdasarkan employee_id
+// GetProjects godoc
+// @Summary Get list of projects
+// @Description Get all projects or projects based on employee ID
+// @Tags projects
+// @Param employee_id query int false "Employee ID"
+// @Produce json
+// @Success 200 {array} models.Project
+// @Failure 500 {object} models.ErrorResponse
+// @Router /projects [get]
 func GetProjects(c *fiber.Ctx) error {
 	employeeID := c.Query("employee_id") // Dapatkan employee_id dari query parameter, jika ada
 
@@ -51,7 +59,16 @@ func GetProjects(c *fiber.Ctx) error {
 	return c.JSON(projects)
 }
 
-// GetProjectByID untuk mendapatkan proyek berdasarkan ID beserta detail karyawan
+// GetProjectByID godoc
+// @Summary Get project by ID
+// @Description Get a single project by ID along with employee details
+// @Tags projects
+// @Param id path int true "Project ID"
+// @Produce json
+// @Success 200 {object} models.CreateProjectResponse
+// @Failure 404 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
+// @Router /projects/{id} [get]
 func GetProjectByID(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var project models.Project
@@ -83,7 +100,17 @@ func GetProjectByID(c *fiber.Ctx) error {
 	return c.JSON(response)
 }
 
-// UpdateProject untuk memperbarui proyek berdasarkan ID
+// UpdateProject godoc
+// @Summary Update project by ID
+// @Description Update a project by ID
+// @Tags projects
+// @Param id path int true "Project ID"
+// @Param project body models.Project true "Project Data"
+// @Produce json
+// @Success 200 {object} models.SuccessResponse
+// @Failure 400 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
+// @Router /projects/{id} [put]
 func UpdateProject(c *fiber.Ctx) error {
 	id := c.Params("id")
 	project := new(models.Project)
@@ -100,7 +127,15 @@ func UpdateProject(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"message": "Project updated successfully"})
 }
 
-// DeleteProject untuk menghapus proyek berdasarkan ID
+// DeleteProject godoc
+// @Summary Delete project by ID
+// @Description Delete a project by ID
+// @Tags projects
+// @Param id path int true "Project ID"
+// @Produce json
+// @Success 200 {object} models.SuccessResponse
+// @Failure 500 {object} models.ErrorResponse
+// @Router /projects/{id} [delete]
 func DeleteProject(c *fiber.Ctx) error {
 	id := c.Params("id")
 
@@ -111,6 +146,17 @@ func DeleteProject(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{"message": "Project deleted successfully"})
 }
+
+// CreateProject godoc
+// @Summary Create a new project
+// @Description Create a new project and link it to an employee
+// @Tags projects
+// @Param project body models.Project true "Project Data"
+// @Produce json
+// @Success 201 {object} models.CreateProjectResponse
+// @Failure 400 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
+// @Router /projects [post]
 
 func CreateProject(c *fiber.Ctx) error {
 	project := new(models.Project)
@@ -144,6 +190,8 @@ func CreateProject(c *fiber.Ctx) error {
 	})
 }
 
+// fetchEmployee retrieves employee details from the employee-service by the provided employeeID.
+// Returns an Employee struct and any error encountered during the request.
 func fetchEmployee(employeeID int) (*Employee, error) {
 	// Konversi employeeID ke string
 	resp, err := http.Get("http://localhost:3000/api/employees/" + strconv.Itoa(employeeID))

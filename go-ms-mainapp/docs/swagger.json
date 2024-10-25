@@ -1,0 +1,115 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for managing employees",
+        "title": "Employee Project Management Service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "paths": {
+        "/employee-projects/{id}": {
+            "get": {
+                "description": "Get employee data and related projects",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "employees"
+                ],
+                "summary": "Get employee projects",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Employee ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.EmployeeProjectsResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Employee": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.EmployeeProjectsResponse": {
+            "type": "object",
+            "properties": {
+                "employee": {
+                    "$ref": "#/definitions/models.Employee"
+                },
+                "projects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Project"
+                    }
+                }
+            }
+        },
+        "models.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Project": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "employee_id": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
